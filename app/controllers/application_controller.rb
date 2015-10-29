@@ -16,6 +16,20 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+
+  def require_admin
+    if current_user.admin? == false
+      flash[:alert] = "Only Admin can view this page."
+      redirect_to new_user_path
+    end
+  end
+
+
+  def @current_user.admin?
+    @current_user.admin == true
+  end
+
+  
   helper_method :current_user
   
 end
