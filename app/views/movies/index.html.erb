@@ -4,6 +4,7 @@
 <h2> Search for movies!
 <%= form_tag(movies_path, :method => "get", id: "search-form") do %>
   <%= text_field_tag :search, params[:search], placeholder: "Movie Title or Director" %>
+  <%= select_tag(:runtime, options_for_select([["", nil], ["Under 90 mins", "under90"],["Between 90 and 120 minutes","between90_120"],["Over 120 minutes", "over120"]])) %>
   <%= submit_tag "Search", :name => nil %>
 <% end %>
 
