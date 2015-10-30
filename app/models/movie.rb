@@ -26,11 +26,17 @@ class Movie < ActiveRecord::Base
 
   def review_average
     if reviews.size > 0
-    reviews.sum(:rating_out_of_ten)/reviews.size
-  else
-    return 0
+      reviews.sum(:rating_out_of_ten)/reviews.size
+    else
+      return 0
+    end
   end
-end
+
+  def self.search(query)
+    where("title LIKE '%#{query}%' OR director LIKE '%#{query}%'") 
+    # q = "%#{params[:query]}%"
+    # User.where("name like ? or description like ?", q, q).to_sql
+  end
 
   protected
 
